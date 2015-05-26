@@ -1,0 +1,39 @@
+{
+	"name": "tripomatic/nette-assetic",
+	"type": "library",
+	"description": "Assetic for Nette Framework",
+	"keywords": ["nette", "assetic"],
+	"homepage": "https://github.com/tripomatic/nette-assetic",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jan Jakes",
+			"email": "jan@jakes.pro"
+		}
+	],
+	"minimum-stability": "dev",
+    "require": {
+		"php": ">=5.4.0",
+        "kriswallsmith/assetic": "^1.2",
+		"nette/application": "^2.3",
+		"nette/di": "^2.3",
+		"nette/http": "^2.3",
+		"latte/latte": "^2.3",
+		"nette/php-generator": "^2.3"
+    },
+	"require-dev": {
+	},
+	"suggest": {
+		"symfony/console": "Allows using Symfony\\Console commands"
+	},
+	"autoload": {
+		"psr-4": {
+			"Tripomatic\\NetteAssetic\\": "src/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
+	}
+}
