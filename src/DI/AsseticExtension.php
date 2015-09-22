@@ -65,12 +65,16 @@ class AsseticExtension extends DI\CompilerExtension
 		// cache
 		$this->compiler->parseServices($builder, ['services' => [$this->prefix('cache') => $config['cache']]]);
 
-		// macros
+		// macros & filters
 		$builder->addDefinition($this->prefix('latte.assetMacro'))
 			->setClass('Tripomatic\NetteAssetic\Latte\AssetMacro');
 
+		$builder->addDefinition($this->prefix('latte.assetFilter'))
+			->setClass('Tripomatic\NetteAssetic\Latte\AssetFilter');
+
 		$builder->getDefinition('nette.latteFactory')
-			->addSetup('addMacro', ['asset', '@' . $this->prefix('latte.assetMacro')]);
+			->addSetup('addMacro', ['asset', '@' . $this->prefix('latte.assetMacro')])
+			->addSetup('addFilter', ['_asset', '@' . $this->prefix('latte.assetFilter')]);
 	}
 
 	public function afterCompile(PhpGenerator\ClassType $class)

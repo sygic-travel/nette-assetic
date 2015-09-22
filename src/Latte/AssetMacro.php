@@ -2,20 +2,11 @@
 
 namespace Tripomatic\NetteAssetic\Latte;
 
-use Assetic\AssetManager;
 use Latte\IMacro;
 use Latte\MacroNode;
 
 class AssetMacro implements IMacro
 {
-	/** @var AssetManager */
-	private $assetManager;
-
-	public function __construct(AssetManager $assetManager)
-	{
-		$this->assetManager = $assetManager;
-	}
-
 	public function initialize()
 	{
 	}
@@ -27,10 +18,9 @@ class AssetMacro implements IMacro
 	public function nodeOpened(MacroNode $node)
 	{
 		$assetName = $node->args;
-		$asset = $this->assetManager->get($assetName);
 
 		$node->isEmpty = TRUE;
-		$node->openingCode = $asset->getTargetPath();
+		$node->openingCode = '<?php $_f = $this->getEngine()->getFilters()["_asset"]; echo $_f("' . $assetName . '"); ?>';
 	}
 
 	public function nodeClosed(MacroNode $node)
