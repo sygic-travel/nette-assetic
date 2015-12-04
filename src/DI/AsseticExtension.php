@@ -113,8 +113,7 @@ class AsseticExtension extends DI\CompilerExtension
 				$router = $this->getService(?);
 				$router[] = $route = new \Tripomatic\NetteAssetic\Application\AssetRoute($this->getService(?));
 				for ($i = $router->count() - 1; $i > 0 ; $i--) { $router[$i] = $router[$i - 1]; };
-				if (count($router) === 0) { $index = NULL; } else { $index = 0; }
-				$router[$index] = $route;
+				$router[0] = $route;
 			';
 			$initialize->addBody($routePrependCode, [
 				'routing.router',
