@@ -20,7 +20,7 @@ class AssetMacro implements IMacro
 		$assetName = $node->args;
 
 		$node->isEmpty = TRUE;
-		$node->openingCode = '<?php $_f = $this->getEngine()->getFilters()["_asset"]; echo $_f("' . $assetName . '"); ?>';
+		$node->openingCode = '<?php $_f = $template->getEngine()->getFilters()["_asset"]; echo $_f("' . $assetName . '"); ?>';
 	}
 
 	public function nodeClosed(MacroNode $node)
