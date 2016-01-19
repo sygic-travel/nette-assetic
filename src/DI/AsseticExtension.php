@@ -39,9 +39,6 @@ class AsseticExtension extends DI\CompilerExtension
 		$builder->addDefinition($this->prefix('assetWriter'))
 			->setClass('Assetic\AssetWriter', [$config['root']]);
 
-		$builder->addDefinition($this->prefix('commands.dumpCommand'))
-			->setClass('Tripomatic\NetteAssetic\Commands\DumpCommand');
-
 		// filters
 		$filterServices = [];
 		foreach ($config['filters'] as $name => $filter) {
@@ -75,6 +72,12 @@ class AsseticExtension extends DI\CompilerExtension
 		$builder->getDefinition('nette.latteFactory')
 			->addSetup('addMacro', ['asset', '@' . $this->prefix('latte.assetMacro')])
 			->addSetup('addFilter', ['_asset', '@' . $this->prefix('latte.assetFilter')]);
+
+		// Symfony\Console commands
+		if (class_exists('Symfony\Component\Console\Command\Command')) {
+			$builder->addDefinition($this->prefix('commands.dumpCommand'))
+				->setClass('Tripomatic\NetteAssetic\Commands\DumpCommand');
+		}
 	}
 
 	public function afterCompile(PhpGenerator\ClassType $class)
