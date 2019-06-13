@@ -19,7 +19,7 @@ class AssetMacro implements IMacro
 	{
 		$assetName = $node->args;
 
-		$node->isEmpty = TRUE;
+		$node->empty = TRUE;
 		$node->openingCode = '<?php echo call_user_func($this->filters->_asset, "' . $assetName . '"); ?>';
 	}
 
